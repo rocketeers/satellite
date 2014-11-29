@@ -11,5 +11,10 @@
   "require": {
     "anahkiasen/rocketeer": "~2.0"
   },
+  "autoload": {
+    "psr-4": {
+      "Rocketeer\\Satellite\\": "src"
+    }
+  },
   "minimum-stability": "stable"
 }
