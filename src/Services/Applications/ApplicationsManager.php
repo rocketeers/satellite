@@ -43,6 +43,11 @@ class ApplicationsManager
 		$apps   = array_map('basename', $apps);
 
 		foreach ($apps as $key => $app) {
+			// Skip apps that aren't yet setup
+			if (!file_exists($folder.DS.$app.DS.'releases')) {
+				continue;
+			}
+
 			$apps[$key] = $this->getApplication($app);
 		}
 
