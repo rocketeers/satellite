@@ -16,7 +16,9 @@ class SatelliteCompiler
 	public function __construct()
 	{
 		$this->compiler = new Compiler(__DIR__.'/../../../bin', 'satellite', array(
-			// ...
+			'd11wtq',
+			'herrera-io',
+			'phine',
 		));
 	}
 
