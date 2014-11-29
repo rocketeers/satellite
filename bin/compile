@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+use Rocketeer\Satellite\Console\Compilation\SatelliteCompiler;
+
+require __DIR__.'/../vendor/autoload.php';
+
+// Create Phar
+$compiler = new SatelliteCompiler();
+$phar     = $compiler->compile();
+
+// Set permissions
+chmod($phar, 0755);

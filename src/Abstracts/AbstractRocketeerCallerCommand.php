@@ -3,6 +3,7 @@ namespace Rocketeer\Satellite\Abstracts;
 
 use Illuminate\Console\Command;
 use Rocketeer\Satellite\Services\Applications\ApplicationsManager;
+use Symfony\Component\Console\Input\InputArgument;
 
 class AbstractRocketeerCallerCommand extends Command
 {

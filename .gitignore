@@ -1,5 +1,7 @@
 # Cache and compiled
+.rocketeer
 composer.lock
+bin/satellite.phar
 
 # Dependencies
 vendor
