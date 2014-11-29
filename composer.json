@@ -9,7 +9,8 @@
     }
   ],
   "require": {
-    "anahkiasen/rocketeer": "~2.0"
+    "anahkiasen/rocketeer": "~2.0",
+    "illuminate/console": "~4.2"
   },
   "autoload": {
     "psr-4": {

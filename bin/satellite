@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+use Rocketeer\Satellite\Console\Satellite;
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+// Launch application
+$app = new Satellite();
+$app->run();
