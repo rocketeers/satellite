@@ -1,0 +1,6 @@
+# Cache and compiled
+composer.lock
+
+# Dependencies
+vendor
+
