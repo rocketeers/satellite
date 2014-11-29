@@ -1,9 +1,15 @@
 #!/usr/bin/env php
 <?php
+use Rocketeer\Satellite\Console\Commands\Setup;
 use Rocketeer\Satellite\Console\Satellite;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
 // Launch application
 $app = new Satellite();
+$app->resolveCommands(array(
+	'Rocketeer\Satellite\Console\Commands\Setup',
+	'Rocketeer\Satellite\Console\Commands\ListApplications',
+));
+
 $app->run();
