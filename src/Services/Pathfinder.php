@@ -31,4 +31,16 @@ class Pathfinder extends \Rocketeer\Services\Pathfinder
 	{
 		return $this->config->get('satellite.apps_folder');
 	}
+
+	/**
+	 * Get the path of an application
+	 *
+	 * @param string $app
+	 *
+	 * @return string
+	 */
+	public function getApplicationFolder($app)
+	{
+		return $this->getApplicationsFolder().DS.$app;
+	}
 }

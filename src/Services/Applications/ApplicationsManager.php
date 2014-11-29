@@ -2,8 +2,11 @@
 namespace Rocketeer\Satellite\Services\Applications;
 
 use DateTime;
+use Illuminate\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Rocketeer\Satellite\Services\Pathfinder;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 class ApplicationsManager
 {
@@ -36,31 +39,89 @@ class ApplicationsManager
 	{
 		$folder = $this->pathfinder->getApplicationsFolder();
 		$apps   = $this->files->directories($folder);
+		$apps   = array_map('basename', $apps);
 
 		foreach ($apps as $key => $app) {
-			$apps[$key] = new Application(array(
-				'name'    => basename($app),
-				'path'    => $app,
-				'current' => $this->getCurrentRelease($app),
-			));
+			$apps[$key] = $this->getApplication($app);
 		}
 
 		return $apps;
 	}
 
+
 	/**
-	 * Get the current release of an application
+	 * Get an application
 	 *
 	 * @param string $app
 	 *
+	 * @return Application
+	 */
+	public function getApplication($app)
+	{
+		$app = new Application(array(
+			'name' => $app,
+			'path' => $this->pathfinder->getApplicationFolder($app),
+		));
+
+		// Set extra informations
+		$app->paths = array(
+			'current'  => $app->path.DS.'current',
+			'releases' => $app->path.DS.'releases',
+			'shared'   => $app->path.DS.'shared',
+		);
+
+		$app->current       = $this->getCurrentRelease($app);
+		$app->configuration = $this->getApplicationConfiguration($app);
+
+		return $app;
+	}
+
+	/**
+	 * Get the current release of an application
+	 *
+	 * @param Application $app
+	 *
 	 * @return DateTime
 	 */
-	protected function getCurrentRelease($app)
+	public function getCurrentRelease(Application $app)
 	{
-		$releases = $this->files->directories($app.DS.'releases');
+		$releases = $this->files->directories($app->paths['releases']);
 		$current  = end($releases);
 		$current  = basename($current);
 
 		return DateTime::createFromFormat('YmdHis', $current);
+	}
+
+	/**
+	 * Get the configuration of an application
+	 *
+	 * @param Application $app
+	 *
+	 * @return array
+	 * @throws FileNotFoundException
+	 */
+	public function getApplicationConfiguration(Application $app)
+	{
+		$folder = $app->paths['current'].DS.'.rocketeer';
+		if (!file_exists($folder)) {
+			throw new FileNotFoundException('No configuration found for '.$app->name);
+		}
+
+		/** @type SplFileInfo[] $files */
+		$files         = (new Finder())->files()->in($folder);
+		$configuration = [];
+		foreach ($files as $file) {
+			if ($file->getExtension() !== 'php' || $file->getBasename() == 'tasks.php') {
+				continue;
+			}
+
+			// Get configuration
+			$key      = $file->getBasename('.php');
+			$contents = include $file->getPathname();
+
+			$configuration[$key] = $contents;
+		}
+
+		return $configuration;
 	}
 }

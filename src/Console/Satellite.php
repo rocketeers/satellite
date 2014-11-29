@@ -26,6 +26,7 @@ class Satellite extends Application
 		$this->resolveCommands(array(
 			'Rocketeer\Satellite\Console\Commands\Setup',
 			'Rocketeer\Satellite\Console\Commands\ListApplications',
+			'Rocketeer\Satellite\Console\Commands\Deploy',
 		));
 	}
 }
