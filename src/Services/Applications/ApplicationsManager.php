@@ -7,7 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Rocketeer\Satellite\Services\Pathfinder;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
+use SplFileInfo;
 
 class ApplicationsManager
 {
@@ -92,9 +92,11 @@ class ApplicationsManager
 	public function getReleases(Application $app)
 	{
 		$releases = $this->files->directories($app->paths['releases']);
-		$releases = new Collection($releases);
+		foreach ($releases as $key => $release) {
+			$releases[$key] = new SplFileInfo($release);
+		}
 
-		return $releases;
+		return new Collection($releases);
 	}
 
 	/**
@@ -106,8 +108,9 @@ class ApplicationsManager
 	 */
 	public function getCurrentRelease(Application $app)
 	{
+		/** @type SplFileInfo $current */
 		$current = $app->releases->last();
-		$current = basename($current);
+		$current = $current->getBasename();
 
 		return DateTime::createFromFormat('YmdHis', $current);
 	}
