@@ -10,6 +10,7 @@ use SplFileInfo;
  *
  * @property string                   $name
  * @property string                   $path
+ * @property array                    $configuration
  * @property Collection|SplFileInfo[] $releases
  * @property \DateTime                $current
  * @author Maxime Fabre <ehtnam6@gmail.com>

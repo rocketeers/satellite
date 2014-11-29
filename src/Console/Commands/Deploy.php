@@ -37,8 +37,20 @@ class Deploy extends Command
 	 */
 	public function fire()
 	{
+		// Get application
 		$app = $this->apps->getApplication($this->argument('app'));
-		!dd($app);
+
+		// Swap out Rocketeer's configuration
+		foreach ($app->configuration as $key => $value) {
+			$this->laravel['config']->set('rocketeer::'.$key, $value);
+		}
+
+		// Get application task
+		/** @type \Rocketeer\Tasks\Deploy $deploy */
+		$this->laravel->instance('rocketeer.command', $this);
+		$deploy = $this->laravel['rocketeer.builder']->buildTask('Deploy');
+		$deploy->setLocal(true);
+		$deploy->fire();
 	}
 
 	/**
