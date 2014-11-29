@@ -45,12 +45,11 @@ class Deploy extends Command
 			$this->laravel['config']->set('rocketeer::'.$key, $value);
 		}
 
-		// Get application task
-		/** @type \Rocketeer\Tasks\Deploy $deploy */
-		$this->laravel->instance('rocketeer.command', $this);
-		$deploy = $this->laravel['rocketeer.builder']->buildTask('Deploy');
-		$deploy->setLocal(true);
-		$deploy->fire();
+		$this->laravel['rocketeer.rocketeer']->setLocal(true);
+
+		// Call the deploy command
+		$rocketeer = $this->laravel['rocketeer.console'];
+		$rocketeer->call('deploy', [], $this->output);
 	}
 
 	/**
