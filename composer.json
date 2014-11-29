@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "anahkiasen/rocketeer": "~2.0",
+    "anahkiasen/rocketeer": "dev-develop",
     "illuminate/console": "~4.2",
     "symfony/yaml": "~2.6"
   },
