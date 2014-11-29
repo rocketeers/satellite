@@ -38,6 +38,7 @@ class AbstractRocketeerCallerCommand extends Command
 		}
 
 		// Set local mode
+		$this->laravel['path.base'] = $app->paths['current'];
 		$this->laravel['rocketeer.rocketeer']->setLocal(true);
 
 		// Call the deploy command
