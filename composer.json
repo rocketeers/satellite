@@ -1,0 +1,15 @@
+{
+  "name": "rocketeers/satellite",
+  "description": "An on-server assistant for Rocketeer",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Maxime Fabre",
+      "email": "ehtnam6@gmail.com"
+    }
+  ],
+  "require": {
+    "anahkiasen/rocketeer": "~2.0"
+  },
+  "minimum-stability": "stable"
+}
