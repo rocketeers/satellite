@@ -127,7 +127,7 @@ class ApplicationsManager
 	{
 		$folder = $app->paths['current'].DS.'.rocketeer';
 		if (!file_exists($folder)) {
-			throw new FileNotFoundException('No configuration found for '.$app->name);
+			return [];
 		}
 
 		/** @type SplFileInfo[] $files */
