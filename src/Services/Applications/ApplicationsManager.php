@@ -110,9 +110,11 @@ class ApplicationsManager
 	{
 		/** @type SplFileInfo $current */
 		$current = $app->releases->last();
-		$current = $current->getBasename();
+		if (!is_object($current)) {
+			return;
+		}
 
-		return DateTime::createFromFormat('YmdHis', $current);
+		return DateTime::createFromFormat('YmdHis', $current->getBasename());
 	}
 
 	/**

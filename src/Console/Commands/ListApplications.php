@@ -43,7 +43,8 @@ class ListApplications extends Command
 		$table = new Table($this->getOutput());
 		$table->setHeaders(['Application', 'Number of releases', 'Latest release']);
 		foreach ($apps as $app) {
-			$table->addRow([$app->name, $app->releases->count(), $app->current->format('Y-m-d H:i:s')]);
+			$current = $app->current ? $app->current->format('Y-m-d H:i:s') : 'None';
+			$table->addRow([$app->name, $app->releases->count(), $current]);
 		}
 
 		$table->render();
