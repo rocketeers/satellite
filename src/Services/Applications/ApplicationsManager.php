@@ -52,7 +52,7 @@ class ApplicationsManager
 			$deployed[] = $this->getApplication($app);
 		}
 
-		return $apps;
+		return $deployed;
 	}
 
 	//////////////////////////////////////////////////////////////////////
