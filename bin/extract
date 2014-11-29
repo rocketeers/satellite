@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+use Rocketeer\Satellite\Console\Compilation\SatelliteCompiler;
+
+require __DIR__.'/../vendor/autoload.php';
+
+// Compile new phar and extract it
+$compiler = new SatelliteCompiler();
+$compiler->extract(__DIR__.'/phar');
