@@ -133,8 +133,13 @@ class ApplicationsManager
 	 */
 	public function getApplicationConfiguration(Application $app)
 	{
-		$folder = $app->paths['current'].DS.'.rocketeer';
-		if (!file_exists($folder)) {
+		$folder = array_filter(array(
+			$app->paths['current'].DS.'.rocketeer',
+			$app->paths['current'].DS.'app'.DS.'config'.DS.'packages'.DS.'anahkiasen'.DS.'rocketeer',
+		), 'file_exists');
+
+		$folder = head($folder);
+		if (!$folder) {
 			return [];
 		}
 
