@@ -41,9 +41,9 @@ class ListApplications extends Command
 
 		// Render applications table
 		$table = new Table($this->getOutput());
-		$table->setHeaders(['Application', 'Latest release']);
+		$table->setHeaders(['Application', 'Number of releases', 'Latest release']);
 		foreach ($apps as $app) {
-			$table->addRow([$app->name, $app->current->format('Y-m-d H:i:s')]);
+			$table->addRow([$app->name, $app->releases->count(), $app->current->format('Y-m-d H:i:s')]);
 		}
 
 		$table->render();

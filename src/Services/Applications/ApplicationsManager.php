@@ -4,6 +4,7 @@ namespace Rocketeer\Satellite\Services\Applications;
 use DateTime;
 use Illuminate\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Collection;
 use Rocketeer\Satellite\Services\Pathfinder;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -48,6 +49,9 @@ class ApplicationsManager
 		return $apps;
 	}
 
+	//////////////////////////////////////////////////////////////////////
+	///////////////////////////// APPLICATION ////////////////////////////
+	//////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Get an application
@@ -63,17 +67,34 @@ class ApplicationsManager
 			'path' => $this->pathfinder->getApplicationFolder($app),
 		));
 
-		// Set extra informations
+		// Set paths
 		$app->paths = array(
 			'current'  => $app->path.DS.'current',
 			'releases' => $app->path.DS.'releases',
 			'shared'   => $app->path.DS.'shared',
 		);
 
+		// Set extra informations
+		$app->releases      = $this->getReleases($app);
 		$app->current       = $this->getCurrentRelease($app);
 		$app->configuration = $this->getApplicationConfiguration($app);
 
 		return $app;
+	}
+
+	/**
+	 * Get the application's releases
+	 *
+	 * @param Application $app
+	 *
+	 * @return Collection
+	 */
+	public function getReleases(Application $app)
+	{
+		$releases = $this->files->directories($app->paths['releases']);
+		$releases = new Collection($releases);
+
+		return $releases;
 	}
 
 	/**
@@ -85,9 +106,8 @@ class ApplicationsManager
 	 */
 	public function getCurrentRelease(Application $app)
 	{
-		$releases = $this->files->directories($app->paths['releases']);
-		$current  = end($releases);
-		$current  = basename($current);
+		$current = $app->releases->last();
+		$current = basename($current);
 
 		return DateTime::createFromFormat('YmdHis', $current);
 	}
