@@ -6,23 +6,23 @@ use Rocketeer\Satellite\Abstracts\AbstractRocketeerCallerCommand;
 use Rocketeer\Satellite\Services\Applications\ApplicationsManager;
 use Symfony\Component\Console\Input\InputArgument;
 
-class Deploy extends AbstractRocketeerCallerCommand
+class Update extends AbstractRocketeerCallerCommand
 {
 	/**
 	 * @type string
 	 */
-	protected $name = 'deploy';
+	protected $name = 'update';
 
 	/**
 	 * @type string
 	 */
-	protected $description = 'Create a new release of an application';
+	protected $description = 'Update the current release of an application';
 
 	/**
 	 * Fire the command
 	 */
 	public function fire()
 	{
-		return $this->callRocketeerCommand('deploy');
+		return $this->callRocketeerCommand('update');
 	}
 }

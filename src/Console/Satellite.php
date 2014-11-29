@@ -27,6 +27,7 @@ class Satellite extends Application
 			'Rocketeer\Satellite\Console\Commands\Setup',
 			'Rocketeer\Satellite\Console\Commands\ListApplications',
 			'Rocketeer\Satellite\Console\Commands\Deploy',
+			'Rocketeer\Satellite\Console\Commands\Update',
 		));
 	}
 }
