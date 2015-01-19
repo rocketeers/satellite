@@ -17,6 +17,8 @@ class Pathfinder extends \Rocketeer\Services\Pathfinder
 	}
 
 	/**
+     * Get the path to Satellite's configuration
+     *
 	 * @return string
 	 */
 	public function getConfigurationFile()
@@ -24,7 +26,26 @@ class Pathfinder extends \Rocketeer\Services\Pathfinder
 		return $this->getSatelliteFolder().DS.'config.yml';
 	}
 
+    /**
+     * Get the place where the logs of an application would be
+     *
+     * @param string|null $application
+     *
+     * @return string
+     */
+    public function getLogsFolder($application = null)
+    {
+        $folder = $this->getSatelliteFolder().DS.'logs';
+        if ($application) {
+            $folder .= DS.$application;
+        }
+
+        return $folder;
+    }
+
 	/**
+     * Get the path were applications are on the server
+     *
 	 * @return string
 	 */
 	public function getApplicationsFolder()
