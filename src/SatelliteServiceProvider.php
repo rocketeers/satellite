@@ -45,6 +45,7 @@ class SatelliteServiceProvider extends ServiceProvider
 			return;
 		}
 
+        $configuration = file_get_contents($configuration);
 		$configuration = Yaml::parse($configuration);
 		$this->app['config']->set('satellite', $configuration);
 	}
