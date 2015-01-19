@@ -34,7 +34,7 @@ class ApplicationsManager
 	/**
 	 * List available applications
 	 *
-	 * @return Application[]
+	 * @return Collection|Application[]
 	 */
 	public function getApplications()
 	{
@@ -42,7 +42,7 @@ class ApplicationsManager
 		$apps   = $this->files->directories($folder);
 		$apps   = array_map('basename', $apps);
 
-		$deployed = [];
+		$deployed = new Collection();
 		foreach ($apps as $key => $app) {
 			// Skip apps that aren't yet setup
 			if (!file_exists($folder.DS.$app.DS.'releases')) {

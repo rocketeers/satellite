@@ -38,6 +38,7 @@ class ListApplications extends Command
 	public function fire()
 	{
 		$apps = $this->apps->getApplications();
+        $apps = $apps->sortByDesc('current');
 
 		// Render applications table
 		$table = new Table($this->getOutput());
