@@ -10,7 +10,7 @@ class TailCommand extends AbstractCommand
     /**
      * @type string
      */
-    protected $name = 'tail';
+    protected $name = 'satellite:tail';
 
     /**
      * @type string
