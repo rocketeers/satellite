@@ -31,7 +31,7 @@ $ rocketeer plugin:install rocketeers/rocketeer
 You'll then have a `tail` command available:
 
 ```bash
-$ rocketeer tail
+$ rocketeer satellite:tail
 ```
 
 Which will print the progress of the deploy as it runs.
