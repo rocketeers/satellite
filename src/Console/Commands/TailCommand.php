@@ -2,9 +2,10 @@
 namespace Rocketeer\Satellite\Console\Commands;
 
 use Illuminate\Console\Command;
+use Rocketeer\Abstracts\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
-class TailCommand extends Command
+class TailCommand extends AbstractCommand
 {
     /**
      * @type string
@@ -21,6 +22,8 @@ class TailCommand extends Command
      */
     public function fire()
     {
+        $this->laravel->instance('rocketeer.command', $this);
+
         // Set connection if needed
         if ($connection = $this->argument('connection')) {
             $this->laravel['rocketeer.connections']->setConnection($connection);
@@ -29,11 +32,8 @@ class TailCommand extends Command
         // Get filename
         $app  = $this->laravel['rocketeer.rocketeer']->getApplicationName();
         $file = sprintf('~/.satellite/logs/%s/%s.txt', $app, strftime('%Y-%m-%d'));
-        if (!$this->laravel['rocketeer.bash']->fileExists($file)) {
-            return $this->error('There is no deployment running for this application');
-        }
 
-        $this->laravel['rocketeer.bash']->tail('~/.satellite/config.yml');
+        $this->laravel['rocketeer.bash']->tail($file);
     }
 
     /**

@@ -43,11 +43,11 @@ class AbstractRocketeerCallerCommand extends Command
         $this->laravel['rocketeer.rocketeer']->setLocal(true);
 
         // Create stream output
-        $stream = $this->getStreamOutput($app);
+        $this->output = $this->getStreamOutput($app);
 
         // Call the deploy command
         $rocketeer = $this->laravel['rocketeer.console'];
-        $rocketeer->call($command, [], $stream);
+        $rocketeer->call($command, [], $this->output);
     }
 
     /**
@@ -79,11 +79,8 @@ class AbstractRocketeerCallerCommand extends Command
             $this->laravel['files']->makeDirectory($folder, 0755, true);
         }
 
-        // Remove file if existing
+        // Compute file path
         $file = $folder.DS.strftime('%Y-%m-%d').'.txt';
-        if (file_exists($file)) {
-            unlink($file);
-        }
 
         return new StreamOutput(fopen($file, 'a', false));
     }

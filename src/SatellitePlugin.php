@@ -3,6 +3,7 @@ namespace Rocketeer\Satellite;
 
 use Rocketeer\Abstracts\AbstractPlugin;
 use Rocketeer\Console\Console;
+use Rocketeer\Satellite\Console\Commands\TailCommand;
 
 class SatellitePlugin extends AbstractPlugin
 {
@@ -13,5 +14,6 @@ class SatellitePlugin extends AbstractPlugin
      */
     public function onConsole(Console $console)
     {
+        $console->add(new TailCommand());
     }
 }
