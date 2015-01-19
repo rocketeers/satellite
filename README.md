@@ -22,10 +22,19 @@ To see which applications are deployed on a particular server, run `satellite ap
 
 To create a new release of an application on your server, run `satellite deploy {your_app}`. This can be called from a git hook, or a PaaS deploy routine, etc.
 
-To follow the deployment from your local application, first install the satellite plugin in your local application:
+To follow the deployment from your local application, first install the satellite plugin in your local application by running:
 
 ```bash
-$ rocketeer plugin:install rocketeers/rocketeer
+$ rocketeer plugin:install rocketeers/satellite
+```
+
+Then add Satellite to your plugins in `config.php`:
+
+```php
+// The plugins to load
+'plugins'          => array(
+    'Rocketeer\Satellite\SatellitePlugin',
+),
 ```
 
 You'll then have a `tail` command available:
