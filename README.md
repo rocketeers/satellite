@@ -7,18 +7,23 @@ It allows you to integrate Rocketeer into your CI process by creating/updating r
 
 ### Via the global PHAR
 
+Simply run the following commands on your server:
+
+```bash
 $ wget http://rocketeer.autopergamene.eu/versions/satellite.phar
 $ chmod +x satellite.phar
 $ mv satellite.phar /usr/local/bin/satellite
+```
 
 ### Via Composer
 
 Simply run `composer global require rocketeers/satellite`, you'll then have a `~/.composer/vendor/bin/satellite` vendor on your server you can access.
-Once this is done, run `satellite setup` to create the Satellite folder on the server.
 
 ## Usage
 
-To see which applications are deployed on a particular server, run `satellite apps`:
+Once you have Satellite on your server, you'll need to set it up, only the first time, by running `satellite setup`.
+
+After that, to see which applications are deployed on a particular server, run `satellite apps`:
 
 ```
 +---------------+--------------------+---------------------+
