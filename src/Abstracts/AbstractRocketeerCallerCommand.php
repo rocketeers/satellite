@@ -43,7 +43,7 @@ class AbstractRocketeerCallerCommand extends Command
         $this->laravel['rocketeer.rocketeer']->setLocal(true);
 
         // Create stream output
-        $this->output = $this->getStreamOutput($app);
+        //$this->output = $this->getStreamOutput($app);
 
         // Call the deploy command
         $rocketeer = $this->laravel['rocketeer.console'];
