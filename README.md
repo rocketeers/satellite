@@ -1,11 +1,19 @@
 # Satellite
 
 Satellite is an on-server assistant for Rocketeer.
-It allows you to integrate Rocketeer into your CI process by creating/updating releases from the server itself, and provide an easy-to-use interface to hook into in build processes and SCM hooks.
+It allows you to integrate Rocketeer into your CI process by creating/updating releases from the server itself, and to virtually deploy from anywhere.
 
 ## Setup
 
-To setup Satellite on your server, simply run `composer global require rocketeers/satellite`, you'll then have a `~/.composer/vendor/bin/satellite` vendor on your server you can access.
+### Via the global PHAR
+
+$ wget http://rocketeer.autopergamene.eu/versions/satellite.phar
+$ chmod +x satellite.phar
+$ mv satellite.phar /usr/local/bin/satellite
+
+### Via Composer
+
+Simply run `composer global require rocketeers/satellite`, you'll then have a `~/.composer/vendor/bin/satellite` vendor on your server you can access.
 Once this is done, run `satellite setup` to create the Satellite folder on the server.
 
 ## Usage
@@ -20,7 +28,7 @@ To see which applications are deployed on a particular server, run `satellite ap
 +---------------+--------------------+---------------------+
 ```
 
-To create a new release of an application on your server, run `satellite deploy {your_app}`. This can be called from a git hook, or a PaaS deploy routine, etc.
+To create a new release of an application on your server, run `satellite deploy {your_app}`. This can be called from an SCM hook, a PaaS deploy routine, etc.
 
 To follow the deployment from your local application, first install the satellite plugin in your local application by running:
 
