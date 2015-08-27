@@ -1,7 +1,5 @@
 #!/usr/bin/env php
 <?php
-use Rocketeer\Satellite\Console\Commands\Setup;
-use Rocketeer\Satellite\Console\Satellite;
 
 $vendors = array(
     __DIR__.'/../vendor',
@@ -20,5 +18,5 @@ foreach ($vendors as $vendor) {
 }
 
 // Launch application
-$app = new Satellite();
+$app = new Rocketeer\Satellite\Console\Satellite();
 $app->run();
